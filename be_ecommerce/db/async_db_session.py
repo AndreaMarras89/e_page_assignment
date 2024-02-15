@@ -15,15 +15,15 @@ class AsyncDatabaseSession:
     """Asynchronous database session."""
 
     def __init__(self) -> None:
-        self.database_url = settings.database_url
+        self.database_url = "",
         self.engine = create_async_engine(
             self.database_url,
             isolation_level="AUTOCOMMIT",
-            echo=settings.db_echo,
+            echo="",
             future=True,
             echo_pool=False,
-            pool_size=settings.db_pool_size,
-            max_overflow=settings.db_max_overflow,
+            pool_size="",
+            max_overflow="",
             pool_pre_ping=True,
         )
         self.async_session = async_sessionmaker(
