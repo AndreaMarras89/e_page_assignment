@@ -1,6 +1,6 @@
 """Definition of the tables"""
 
-from sqlalchemy import UUID, Column, Integer, String, Float, Text
+from sqlalchemy import UUID, Column, Float, Integer, String, Text
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()

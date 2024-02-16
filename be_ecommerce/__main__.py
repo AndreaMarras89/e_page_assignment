@@ -3,7 +3,6 @@
 import argparse
 
 import gunicorn.app.base
-
 from gunicorn.glogging import Logger
 from loguru import logger
 

@@ -2,10 +2,10 @@
 
 import secrets
 
-from be_ecommerce.api.routers import router
-
 from fastapi import Depends, FastAPI, HTTPException, Request, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
+
+from be_ecommerce.api.routers import router
 
 security = HTTPBasic()
 
