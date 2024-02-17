@@ -26,7 +26,7 @@ def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
 def create_app() -> FastAPI:
     """Creates the application."""
 
-    this_app = FastAPI(  
+    this_app = FastAPI(
         title="be-commerce: ",
     )
 
