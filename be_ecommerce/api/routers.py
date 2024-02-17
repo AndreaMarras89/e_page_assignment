@@ -1,29 +1,21 @@
 """Endpoint Definition"""
 
-from sqlalchemy import func
-from be_ecommerce.db.tables import Product as ProductTable, User, UserData, UserCart
-from sqlalchemy import select, insert, delete, or_, and_, update
-
 from uuid import uuid4
 
-from be_ecommerce.db.async_db_session import AsyncDatabaseSession
-
 from fastapi import APIRouter, HTTPException
+from sqlalchemy import and_, delete, func, insert, or_, select, update
 
-from be_ecommerce.api.models import (
-    Product,
-    ProductAddCartInput,
-    ProductAddCartOutput,
-    ProductSearchInput,
-    ProductSearchOutput,
-    ProductDetailsInput,
-    ProductDetailsOutput,
-    ProductRemovalAllInput,
-    ProductRemovalAllOutput,
-    ProductRemovalWithQuantityInput,
-    ProductRemovalWithQuantityOutput,
-)
-
+from be_ecommerce.api.models import (Product, ProductAddCartInput,
+                                     ProductAddCartOutput, ProductDetailsInput,
+                                     ProductDetailsOutput,
+                                     ProductRemovalAllInput,
+                                     ProductRemovalAllOutput,
+                                     ProductRemovalWithQuantityInput,
+                                     ProductRemovalWithQuantityOutput,
+                                     ProductSearchInput, ProductSearchOutput)
+from be_ecommerce.db.tables import Product as ProductTable
+from be_ecommerce.db.tables import User, UserCart, UserData
+from be_ecommerce.db.utils import AsyncDatabaseSession
 
 router = APIRouter()  # invoco costruttore default
 
