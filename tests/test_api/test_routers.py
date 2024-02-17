@@ -1,3 +1,5 @@
+"""Test class for endpoints"""
+
 from unittest import IsolatedAsyncioTestCase
 from unittest.mock import AsyncMock, patch
 
@@ -11,6 +13,7 @@ test_server = TestClient(create_app())
 
 
 class MockedQueryResult:
+    """class for mocking the results from sqlAlchemy"""
     result: list = []
 
     def __init__(self, result: list) -> None:

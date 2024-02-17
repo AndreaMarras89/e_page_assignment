@@ -6,9 +6,7 @@ import gunicorn.app.base
 from gunicorn.glogging import Logger
 from loguru import logger
 
-
-def post_fork(server, worker):
-    """Post fork method."""
+from be_ecommerce.configuration import config
 
 
 class StandaloneApplication(gunicorn.app.base.BaseApplication):
@@ -37,9 +35,9 @@ class StandaloneApplication(gunicorn.app.base.BaseApplication):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--workers", type=int, default=1)
-    parser.add_argument("--bind", type=str, default=f"0.0.0.0:{8088}")
-    parser.add_argument("--timeout", type=str, default=str(30))
+    parser.add_argument("--workers", type=int, default=config.default_workers)
+    parser.add_argument("--bind", type=str, default=f"0.0.0.0:{config.server_port}")
+    parser.add_argument("--timeout", type=str, default=str(config.default_timeout))
     parser.add_argument("--local", dest="local", action="store_true")
     parser.set_defaults(local=False)
     args = parser.parse_args()
@@ -48,7 +46,6 @@ if __name__ == "__main__":
         "bind": args.bind,
         "workers": args.workers,
         "timeout": args.timeout,
-        "post_fork": post_fork,
         "worker_class": "uvicorn.workers.UvicornWorker",
         "logger_class": Logger,
         "preload": True,
@@ -65,10 +62,10 @@ if __name__ == "__main__":
         uvicorn.run(
             "be_ecommerce.app:app",
             host="0.0.0.0",
-            port=8088,
-            log_level="info",
+            port=config.server_port,
+            log_level=config.log_level,
             reload=True,
-            workers=1,
+            workers=config.default_workers,
         )
     else:
         logger.info("Starting server gunicorn")

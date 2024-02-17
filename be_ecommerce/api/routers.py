@@ -20,8 +20,8 @@ from be_ecommerce.db.utils import AsyncDatabaseSession
 router = APIRouter()  # invoco costruttore default
 
 
-# Funzione check user
 async def check_user_exists(user_id: str) -> bool:
+    """Utility function to check if the user_id exists in the database"""
     session_maker = AsyncDatabaseSession()
     async with session_maker.get_session() as session:
         my_query = select(User).where(user_id == User.uid)
@@ -32,8 +32,8 @@ async def check_user_exists(user_id: str) -> bool:
         return False
 
 
-# Funzione check product
 async def check_product_exists(product_id: str) -> bool:
+    """Utility function to check if the product_id exists in the database"""
     session_maker = AsyncDatabaseSession()
     async with session_maker.get_session() as session:
         my_query = select(ProductTable.id).where(ProductTable.id == product_id)
@@ -44,10 +44,9 @@ async def check_product_exists(product_id: str) -> bool:
         return False
 
 
-@router.post(
-    "/search", responses={200: {"model": ProductSearchOutput, "description": ""}}
-)
+@router.post("/search")
 async def search_product(payload: ProductSearchInput) -> dict:
+    """Logic of the search endpoint"""
     session_maker = AsyncDatabaseSession()
     async with session_maker.get_session() as session:
         my_sql = select(ProductTable).where(
@@ -70,10 +69,9 @@ async def search_product(payload: ProductSearchInput) -> dict:
         return {"products": result_list}
 
 
-@router.post(
-    "/add_product", responses={200: {"model": ProductAddCartOutput, "description": ""}}
-)
+@router.post("/add_product")
 async def add_to_cart(payload: ProductAddCartInput) -> ProductAddCartOutput:
+    """Logic of the add_product endpoint"""
     session_maker = AsyncDatabaseSession()
     async with session_maker.get_session() as session:
         if await check_user_exists(payload.user_id) and await check_product_exists(
@@ -117,11 +115,9 @@ async def add_to_cart(payload: ProductAddCartInput) -> ProductAddCartOutput:
     return {"added": True}
 
 
-@router.post(
-    "/product_details",
-    responses={200: {"model": ProductDetailsOutput, "description": ""}},
-)
+@router.post("/product_details")
 async def product_details(payload: ProductDetailsInput) -> ProductDetailsOutput:
+    """Logic of the product_details endpoint"""
     session_maker = AsyncDatabaseSession()
     async with session_maker.get_session() as session:
         my_sql = select(ProductTable).where(ProductTable.id == payload.product_id)
@@ -140,13 +136,11 @@ async def product_details(payload: ProductDetailsInput) -> ProductDetailsOutput:
             )
 
 
-@router.post(
-    "/product_removal_all",
-    responses={200: {"model": ProductRemovalAllOutput, "descrption": ""}},
-)
+@router.post("/product_removal_all")
 async def product_removal_all(
     payload: ProductRemovalAllInput,
 ) -> ProductRemovalAllOutput:
+    """Logic of the product_removal_all endpoint"""
     if not check_user_exists(payload.user_id):
         raise HTTPException(status_code=404, detail="User not found")
     session_maker = AsyncDatabaseSession()
@@ -158,13 +152,11 @@ async def product_removal_all(
         return {"removed": True}
 
 
-@router.post(
-    "/product_removal_quantity",
-    responses={200: {"model": ProductRemovalWithQuantityOutput, "descrption": ""}},
-)
+@router.post("/product_removal_quantity")
 async def product_removal_quantity(
     payload: ProductRemovalWithQuantityInput,
 ) -> ProductRemovalWithQuantityOutput:
+    """Logic of the product_removal_quantity endpoint"""
     session_maker = AsyncDatabaseSession()
     if not check_user_exists(payload.user_id):
         raise HTTPException(status_code=404, detail="User not found")

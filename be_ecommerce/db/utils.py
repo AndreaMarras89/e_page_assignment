@@ -1,4 +1,4 @@
-"""This module defines the database connection and how it works."""
+"""Database connection and utilities"""
 
 import asyncio
 import contextlib
@@ -9,6 +9,8 @@ from sqlalchemy.ext.asyncio import (AsyncSession, async_sessionmaker,
                                     create_async_engine)
 from sqlalchemy.orm import declarative_base
 
+from be_ecommerce.configuration import config
+
 Base = declarative_base()
 
 
@@ -16,23 +18,13 @@ class AsyncDatabaseSession:
     """Asynchronous database session."""
 
     def __init__(self) -> None:
-        self.database_url = "postgresql+asyncpg://user:pass123@localhost:5432/postgres"
+        self.database_url = config.database_url
         self.engine = create_async_engine(
             self.database_url,
             isolation_level="AUTOCOMMIT",
-            echo=False,
-            future=True,
-            echo_pool=False,
-            pool_size=2,
-            max_overflow=2,
-            pool_pre_ping=True,
         )
         self.async_session = async_sessionmaker(
             bind=self.engine,
-            autoflush=False,
-            future=True,
-            expire_on_commit=False,
-            autocommit=False,
         )
 
     async def init_db(self):
@@ -47,7 +39,6 @@ class AsyncDatabaseSession:
         try:
             yield session
         except SQLAlchemyError:
-            # logger.exception("Catched SQLAlchemyError")
             raise
         finally:
             await asyncio.shield(session.close())
