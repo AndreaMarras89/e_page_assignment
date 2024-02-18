@@ -7,3 +7,22 @@ services:
       - POSTGRES_PASSWORD=pass123
       - POSTGRES_USER=user
       - POSTGRES_DB=postgres
+    networks:
+      be_ecommerce_network:
+        ipv4_address: 10.0.0.15
+  api_server:
+    image: "be_ecommerce"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      be_ecommerce_network:
+        ipv4_address: 10.0.0.14
+
+networks:
+  be_ecommerce_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.0.0/16

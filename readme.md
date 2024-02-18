@@ -1,16 +1,20 @@
+
 # Overview
 
-Ho sviluppato un server espone degli endpoint attraverso FastAPI per un'ipotetica pagina di e-commerce.Questo rappresentato soltanto un piccolo esempio, ho messo a disposizione alcune funzionalità base come la ricerca, aggiunta al carrello, la rimozione di un articolo o di tutti all'interno del carrello dell'utente.
-Le tecnologie che ho deciso di impiegare sono:
-- FastAPI per esporre gli endpoints
-- Postgres come database
-- Docker come ambiente virtualizzato per far girare entrambi
-- SqlAlchemy come interfaccia con il database
+I have developed a server that exposes endpoints through FastAPI for a hypothetical e-commerce page. This is just a small example, I have made some basic features available such as search, adding to cart, removing an item or all of them inside the user's shopping cart.
+The technologies I decided to use are:
+- FastAPI to expose endpoints
+- Postgres as database
+- Docker as a virtualized environment to run both
+- SqlAlchemy as an interface with the database
 
 # Endpoint description
 
-- Endpoint 1 - Ricerca. Funzionalità di ricerca dei prodotti disponibili mediante una query testuale.
-Route: "/search" 
+## Endpoint 1 - Research. Product search functionality available via a text query.
+```bash
+Route: 
+"/search"
+``` 
 Input: {"query" : "Scarf"}
 Output: 
 {
@@ -25,13 +29,13 @@ Output:
 }
 
 
-- Endpoint 2 - Aggiunta prodotto al carrello dell'utente.
+## Endpoint 2 - Adding a product to the User's cart
 Route: "/add_product"
 Input: {"user_id" : "ad5ce827-4a17-4b74-9693-53a2b74f177c", "product_id" : "9e94e4ac-4a33-4945-b4aa-cd10f84e6351", "quantity" : 1}
 Output: {"added": true}
 
 
-- Endpoint 3 - Dettagli prodotto. Funzionalità che restituisce dato un codice i dettagli del prodotto con dato codice.
+## Endpoint 3 - Getting details of a product given the product id
 Route: "/product_details"
 Input: {"product_id" : "66373dbe-edcd-41c4-9d29-61f641068312"}
 Output: 
@@ -42,7 +46,7 @@ Output:
 }
 
 
-- Endpoint 4 - Rimozione quantità specifica di un prodotto dal carrello di uno specifico utente.
+## Endpoint 4 - Removing a specific quantity of a product from a specific user's cart.
 Route: "/product_removal_quantity"
 Input: {"user_id" : "ad5ce927-4a17-4b74-9693-53a2b74f177c", "product_id" : "9e94e4ac-4a33-4945-b4aa-cd10f84e6351", "quantity" : "2"}
 Output:
@@ -50,7 +54,7 @@ Output:
     "removed": true
 }
 
-- Endpoint 5 - Rimozione di tutti gli elementi nel carrello
+## Endpoint 5 - Removal all items in the user's cart
 Route: "/product_removal_all"
 Input: {"user_id": "ad5ce927-4a17-4b74-9693-53a2b74f177c"}
 Output:
@@ -60,7 +64,6 @@ Output:
 
 # Local run steps
 
-1) Run docker for postgres (docker-compose -up)
-2) Execute the script to populate the database with the sample data
-3) docker for API-server (docker qualcosa)
+1) Run docker for postgres and fastAPI (docker-compose -up)
+2) Execute the script to populate the database with the sample data (psql -h <IP_DATABASE> -p <PORT_DATABASE> -d postgres -U user < dump_file.sql)
 
