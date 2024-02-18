@@ -29,7 +29,7 @@ class MockedQueryResult:
 class TestRouter(IsolatedAsyncioTestCase):
 
     def test_search(self):
-        # simulazione del db
+        
         record1 = ProductTable(
             id="27ddedb9-d493-423a-8eae-4484419986ba",
             name="Cappotto",
@@ -54,7 +54,7 @@ class TestRouter(IsolatedAsyncioTestCase):
             "sqlalchemy.engine.result.ChunkedIteratorResult.fetchall", return_value=None
         ):
             response = test_server.post(url="/search", json={"query": "cuffia"})
-            # print(response.json())
+            
             self.assertEqual(response.status_code, 200)
             self.assertEqual(
                 response.json()["products"][0]["id"],
