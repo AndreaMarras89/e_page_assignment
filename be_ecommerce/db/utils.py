@@ -29,12 +29,14 @@ class DatabaseSessionMaker:
 
     async def init_db(self):
         """Initialize database."""
+        
         async with self.engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
 
     @contextlib.asynccontextmanager
     async def get_session(self) -> AsyncIterator[AsyncSession]:
         """Getter for database session."""
+        
         session = self.async_session()
         try:
             yield session

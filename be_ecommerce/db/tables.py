@@ -7,6 +7,8 @@ Base = declarative_base()
 
 
 class Product(Base):
+    """Product Table"""
+    
     __tablename__ = "Product"
 
     id = Column("ID", UUID, primary_key=True)
@@ -16,6 +18,8 @@ class Product(Base):
 
 
 class User(Base):
+    """User Table"""
+    
     __tablename__ = "User"
 
     uid = Column("UID", UUID, primary_key=True)
@@ -24,6 +28,7 @@ class User(Base):
 
 
 class UserCart(Base):
+    """UserCart Table"""
     __tablename__ = "User_Cart"
 
     pid = Column("PID", UUID, primary_key=True)

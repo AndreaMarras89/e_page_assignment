@@ -17,7 +17,7 @@ from be_ecommerce.db.tables import Product as ProductTable
 from be_ecommerce.db.tables import User, UserCart
 from be_ecommerce.db.utils import DatabaseSessionMaker
 
-router = APIRouter()  # invoco costruttore default
+router = APIRouter()
 session_maker = DatabaseSessionMaker()
 
 
