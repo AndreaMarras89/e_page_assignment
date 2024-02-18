@@ -43,9 +43,9 @@ class TestRouter(IsolatedAsyncioTestCase):
             description="Maglietta con una banana sopra",
         )
         with patch(
-            "be_ecommerce.db.utils.AsyncDatabaseSession", return_value=AsyncMock()
+            "be_ecommerce.db.utils.DatabaseSessionMaker", return_value=AsyncMock()
         ), patch(
-            "be_ecommerce.db.utils.AsyncDatabaseSession.get_session",
+            "be_ecommerce.db.utils.DatabaseSessionMaker.get_session",
             return_value=AsyncMock(),
         ), patch(
             "sqlalchemy.ext.asyncio.AsyncSession.execute",
@@ -64,10 +64,10 @@ class TestRouter(IsolatedAsyncioTestCase):
 
             with self.subTest("Test empty result"):
                 with patch(
-                    "be_ecommerce.db.utils.AsyncDatabaseSession",
+                    "be_ecommerce.db.utils.DatabaseSessionMaker",
                     return_value=AsyncMock(),
                 ), patch(
-                    "be_ecommerce.db.utils.AsyncDatabaseSession.get_session",
+                    "be_ecommerce.db.utils.DatabaseSessionMaker.get_session",
                     return_value=AsyncMock(),
                 ), patch(
                     "sqlalchemy.ext.asyncio.AsyncSession.execute",
@@ -82,9 +82,9 @@ class TestRouter(IsolatedAsyncioTestCase):
     def test_add(self):
         with self.subTest("Test successful add"):
             with patch(
-                "be_ecommerce.db.utils.AsyncDatabaseSession", return_value=AsyncMock()
+                "be_ecommerce.db.utils.DatabaseSessionMaker", return_value=AsyncMock()
             ), patch(
-                "be_ecommerce.db.utils.AsyncDatabaseSession.get_session",
+                "be_ecommerce.db.utils.DatabaseSessionMaker.get_session",
                 return_value=AsyncMock(),
             ), patch(
                 "sqlalchemy.ext.asyncio.AsyncSession.execute",
@@ -111,12 +111,12 @@ class TestRouter(IsolatedAsyncioTestCase):
                 self.assertEqual(response.status_code, 200)
             with self.subTest("Test wrong add"):
                 with patch(
-                    "be_ecommerce.db.utils.AsyncDatabaseSession",
+                    "be_ecommerce.db.utils.DatabaseSessionMaker",
                     return_value=AsyncMock(),
                 ), patch(
                     "be_ecommerce.api.routers.check_user_exists", return_value=False
                 ), patch(
-                    "be_ecommerce.db.utils.AsyncDatabaseSession.get_session",
+                    "be_ecommerce.db.utils.DatabaseSessionMaker.get_session",
                     return_value=AsyncMock(),
                 ), patch(
                     "sqlalchemy.ext.asyncio.AsyncSession.execute",
@@ -150,9 +150,9 @@ class TestRouter(IsolatedAsyncioTestCase):
             description="Cappotto di lana merinos",
         )
         with patch(
-            "be_ecommerce.db.utils.AsyncDatabaseSession", return_value=AsyncMock()
+            "be_ecommerce.db.utils.DatabaseSessionMaker", return_value=AsyncMock()
         ), patch(
-            "be_ecommerce.db.utils.AsyncDatabaseSession.get_session",
+            "be_ecommerce.db.utils.DatabaseSessionMaker.get_session",
             return_value=AsyncMock(),
         ), patch(
             "sqlalchemy.ext.asyncio.AsyncSession.execute",
@@ -171,10 +171,10 @@ class TestRouter(IsolatedAsyncioTestCase):
             )
             with self.subTest("Test empty result"):
                 with patch(
-                    "be_ecommerce.db.utils.AsyncDatabaseSession",
+                    "be_ecommerce.db.utils.DatabaseSessionMaker",
                     return_value=AsyncMock(),
                 ), patch(
-                    "be_ecommerce.db.utils.AsyncDatabaseSession.get_session",
+                    "be_ecommerce.db.utils.DatabaseSessionMaker.get_session",
                     return_value=AsyncMock(),
                 ), patch(
                     "sqlalchemy.ext.asyncio.AsyncSession.execute",
@@ -192,9 +192,9 @@ class TestRouter(IsolatedAsyncioTestCase):
     def test_remove_all(self):
         with self.subTest("Test successful removed"):
             with patch(
-                "be_ecommerce.db.utils.AsyncDatabaseSession", return_value=AsyncMock()
+                "be_ecommerce.db.utils.DatabaseSessionMaker", return_value=AsyncMock()
             ), patch(
-                "be_ecommerce.db.utils.AsyncDatabaseSession.get_session",
+                "be_ecommerce.db.utils.DatabaseSessionMaker.get_session",
                 return_value=AsyncMock(),
             ), patch(
                 "sqlalchemy.ext.asyncio.AsyncSession.execute",
@@ -219,12 +219,12 @@ class TestRouter(IsolatedAsyncioTestCase):
                 self.assertEqual(response.status_code, 200)
             with self.subTest("Test wrong remove"):
                 with patch(
-                    "be_ecommerce.db.utils.AsyncDatabaseSession",
+                    "be_ecommerce.db.utils.DatabaseSessionMaker",
                     return_value=AsyncMock(),
                 ), patch(
                     "be_ecommerce.api.routers.check_user_exists", return_value=False
                 ), patch(
-                    "be_ecommerce.db.utils.AsyncDatabaseSession.get_session",
+                    "be_ecommerce.db.utils.DatabaseSessionMaker.get_session",
                     return_value=AsyncMock(),
                 ), patch(
                     "sqlalchemy.ext.asyncio.AsyncSession.execute",
@@ -251,9 +251,9 @@ class TestRouter(IsolatedAsyncioTestCase):
     def test_remove_quantity(self):
         with self.subTest("Test successful removed"):
             with patch(
-                "be_ecommerce.db.utils.AsyncDatabaseSession", return_value=AsyncMock()
+                "be_ecommerce.db.utils.DatabaseSessionMaker", return_value=AsyncMock()
             ), patch(
-                "be_ecommerce.db.utils.AsyncDatabaseSession.get_session",
+                "be_ecommerce.db.utils.DatabaseSessionMaker.get_session",
                 return_value=AsyncMock(),
             ), patch(
                 "sqlalchemy.ext.asyncio.AsyncSession.execute",
@@ -280,12 +280,12 @@ class TestRouter(IsolatedAsyncioTestCase):
                 self.assertEqual(response.status_code, 200)
             with self.subTest("Test wrong remove"):
                 with patch(
-                    "be_ecommerce.db.utils.AsyncDatabaseSession",
+                    "be_ecommerce.db.utils.DatabaseSessionMaker",
                     return_value=AsyncMock(),
                 ), patch(
                     "be_ecommerce.api.routers.check_user_exists", return_value=False
                 ), patch(
-                    "be_ecommerce.db.utils.AsyncDatabaseSession.get_session",
+                    "be_ecommerce.db.utils.DatabaseSessionMaker.get_session",
                     return_value=AsyncMock(),
                 ), patch(
                     "sqlalchemy.ext.asyncio.AsyncSession.execute",
