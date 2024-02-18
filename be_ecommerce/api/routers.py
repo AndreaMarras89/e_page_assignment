@@ -14,7 +14,7 @@ from be_ecommerce.api.models import (Product, ProductAddCartInput,
                                      ProductRemovalWithQuantityOutput,
                                      ProductSearchInput, ProductSearchOutput)
 from be_ecommerce.db.tables import Product as ProductTable
-from be_ecommerce.db.tables import User, UserCart, UserData
+from be_ecommerce.db.tables import User, UserCart
 from be_ecommerce.db.utils import AsyncDatabaseSession
 
 router = APIRouter()  # invoco costruttore default

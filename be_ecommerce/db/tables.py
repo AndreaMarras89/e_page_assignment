@@ -29,10 +29,3 @@ class UserCart(Base):
     pid = Column("PID", UUID, primary_key=True)
     uid = Column("UID", UUID, primary_key=True)
     quantity = Column("Quantity", Integer)
-
-
-class UserData(Base):
-    __tablename__ = "User_Data"
-
-    cod_u = Column("CodU", UUID, primary_key=True)
-    card_num = Column("Card_Num", Integer)
