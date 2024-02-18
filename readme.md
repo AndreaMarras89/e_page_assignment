@@ -21,8 +21,8 @@ Input:
     "query" : "Scarf"
 }
 ```
-```json
-Output: 
+Output:
+```json 
 {
     "products": [
         {
