@@ -11,11 +11,17 @@ The technologies I decided to use are:
 # Endpoint description
 
 ## Endpoint 1 - Research. Product search functionality available via a text query.
-```bash
-Route: 
-"/search"
+Route:
+```bash 
+/search
 ``` 
-Input: {"query" : "Scarf"}
+Input: 
+```json
+{
+    "query" : "Scarf"
+}
+```
+```json
 Output: 
 {
     "products": [
@@ -27,43 +33,97 @@ Output:
         }
     ]
 }
+```
 
 
 ## Endpoint 2 - Adding a product to the User's cart
-Route: "/add_product"
-Input: {"user_id" : "ad5ce827-4a17-4b74-9693-53a2b74f177c", "product_id" : "9e94e4ac-4a33-4945-b4aa-cd10f84e6351", "quantity" : 1}
-Output: {"added": true}
+Route:
+```bash 
+/add_product
+```
 
+Input:
+```json 
+{
+    "user_id" : "ad5ce827-4a17-4b74-9693-53a2b74f177c", 
+    "product_id" : "9e94e4ac-4a33-4945-b4aa-cd10f84e6351", 
+    "quantity" : 1
+}
+```
+Output:
+```json 
+{
+    "added": true
+}
+```
 
 ## Endpoint 3 - Getting details of a product given the product id
-Route: "/product_details"
-Input: {"product_id" : "66373dbe-edcd-41c4-9d29-61f641068312"}
-Output: 
+Route: 
+```bash
+/product_details
+```
+Input:
+```json 
+{
+    "product_id" : "66373dbe-edcd-41c4-9d29-61f641068312"
+}
+```
+Output:
+```json 
 {
     "product_name": "Scarf",
     "product_description": "Woolen",
     "product_price": 23.0
 }
+```
 
 
 ## Endpoint 4 - Removing a specific quantity of a product from a specific user's cart.
-Route: "/product_removal_quantity"
-Input: {"user_id" : "ad5ce927-4a17-4b74-9693-53a2b74f177c", "product_id" : "9e94e4ac-4a33-4945-b4aa-cd10f84e6351", "quantity" : "2"}
+Route: 
+```bash
+/product_removal_quantity
+```
+Input:
+```json 
+{
+    "user_id" : "ad5ce927-4a17-4b74-9693-53a2b74f177c", 
+    "product_id" : "9e94e4ac-4a33-4945-b4aa-cd10f84e6351", 
+    "quantity" : "2"
+}
+```
 Output:
+```json
 {
     "removed": true
 }
+```
 
 ## Endpoint 5 - Removal all items in the user's cart
-Route: "/product_removal_all"
-Input: {"user_id": "ad5ce927-4a17-4b74-9693-53a2b74f177c"}
+Route:
+```bash 
+/product_removal_all
+```
+Input: 
+```json
+{
+    "user_id": "ad5ce927-4a17-4b74-9693-53a2b74f177c"
+}
+```
 Output:
+```json
 {
     "removed": true
 }
+```
 
 # Local run steps
 
-1) Run docker for postgres and fastAPI (docker-compose -up)
-2) Execute the script to populate the database with the sample data (psql -h <IP_DATABASE> -p <PORT_DATABASE> -d postgres -U user < dump_file.sql)
+1) Run docker for postgres and fastAPI 
+```bash
+docker-compose -up
+```
+2) Execute the script to populate the database with the sample data 
+```bash
+psql -h <IP_DATABASE> -p <PORT_DATABASE> -d postgres -U user < dump_file.sql
+```
 
