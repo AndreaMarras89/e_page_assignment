@@ -14,7 +14,7 @@ from be_ecommerce.configuration import config
 Base = declarative_base()
 
 
-class AsyncDatabaseSession:
+class DatabaseSessionMaker:
     """Asynchronous database session."""
 
     def __init__(self) -> None:
